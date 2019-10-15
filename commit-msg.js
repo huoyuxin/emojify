@@ -3,22 +3,32 @@
 const fs = require("fs");
 const path = require("path");
 const commander = require("commander");
-const default_emojis = require("./config");
 
-commander.option("-p, --path", "input emojis path");
-program.parse(process.argv);
+const DEFAULT_PATH = "./";
+const DEFAULT_FILE = "./gitemoji.json";
 
-if (program.path) {
-  console.log("emojify > program.path", program.path);
+commander.option("-p, --path <path>", "input emojis path");
+commander.parse(process.argv);
+
+const defaultJson = fs
+  .readFileSync(path.resolve(DEFAULT_PATH, DEFAULT_FILE), "utf8")
+  .trim();
+const default_emojis = JSON.parse(defaultJson);
+let option_emojis;
+
+if (commander.path) {
+  const configJson = fs
+    .readFileSync(path.resolve(commander.path, DEFAULT_FILE), "utf8")
+    .trim();
+  option_emojis = JSON.parse(configJson);
 }
-process.emit(1);
+const emojis = option_emojis || default_emojis;
+console.log("emojify > emojis", emojis);
 
 const {
-  argv,
   env: { HUSKY_GIT_PARAMS, GIT_PREFIX, PWD }
 } = process;
 
-const emojis = option_emojis || default_emojis;
 const relativePath = path.relative(GIT_PREFIX, PWD);
 const messagePath = path.resolve(relativePath, HUSKY_GIT_PARAMS);
 

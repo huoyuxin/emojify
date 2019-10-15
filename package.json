@@ -33,7 +33,7 @@
   "husky": {
     "hooks": {
       "prepare-commit-msg": "commitlint -e $HUSKY_GIT_PARAMS;",
-      "commit-msg": "node .githooks/commit-msg.js"
+      "commit-msg": "node ./commit-msg.js"
     }
   }
 }
