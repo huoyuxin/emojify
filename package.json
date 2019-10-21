@@ -1,12 +1,16 @@
 {
-  "name": "emojify",
-  "version": "1.0.0",
+  "name": "git-emoji",
+  "version": "1.0.1",
   "description": "git commit message auto add emoji icon",
-  "main": "commit-msg.js",
-  "bin": "./commit-msg.js",
+  "bin": {
+    "git-emoji": "bin/git-emoji.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "files": [
+    "bin"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/huoyuxin/auto-emoji-log.git"
@@ -33,7 +37,7 @@
   "husky": {
     "hooks": {
       "prepare-commit-msg": "commitlint -e $HUSKY_GIT_PARAMS;",
-      "commit-msg": "node ./commit-msg.js"
+      "commit-msg": "node bin/git-emoji.js"
     }
   }
 }

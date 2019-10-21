@@ -1,9 +1,10 @@
 const fs = require("fs");
 
-const DEFAULT_PATH = "./gitemoji.json";
+const DEFAULT_FILE = "./gitemoji.json";
 
-const defaultJson = fs.readFileSync(DEFAULT_PATH, "utf8").trim();
+const defaultJson = fs.readFileSync(DEFAULT_FILE, "utf8").trim();
 const emojis = JSON.parse(defaultJson);
+
 console.log("emojify > emojis", emojis);
 
 module.exports = {
